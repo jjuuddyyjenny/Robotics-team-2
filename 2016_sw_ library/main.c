@@ -133,12 +133,12 @@ int main()
 				int x = find_white_line();
 			
 					
-			if(x>50 && x<72)
+			if(x>55 && x<62)
 			{
 				motor_state=1;
 				if (y==motor_state){
 				}else{
-				motor_state = 1;
+				
 		
 			tft_prints(3,10,"go straight la ");
 			tft_update();
@@ -147,7 +147,7 @@ int main()
 					y=1;
 				}
 			}
-			 if(x<51)
+			 if(x<56)
 			{
 				motor_state=2;
 				if(y==motor_state){
@@ -155,12 +155,12 @@ int main()
 			
 				tft_prints(3,6,"turn left ");
 				tft_update();
-				motor_control(1,1,0);
+				motor_control(1,0,80);
 				motor_control(2,0,120);
 					y=2;
 				}
 			}
-			 if(x>71)
+			 if(x>61)
 			{
 			 motor_state=3;
 				if(y==motor_state){
@@ -168,7 +168,7 @@ int main()
 				tft_prints(3,6,"turn right ");
 				tft_update();
 				motor_control(1,1,120);
-				motor_control(2,0,0);
+				motor_control(2,1,80);
 					y=3;
 				}
 				

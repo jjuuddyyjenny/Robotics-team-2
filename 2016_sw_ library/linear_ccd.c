@@ -199,13 +199,11 @@ void linear_ccd_clear()
     for(int i = 0; i < targetNumber; i++) {
         sum += xvalues[i];
     }
-		if(target>110)
-		{
+		
     averagex = sum/targetNumber;
 
     return averagex;
 		}
-		else
-		{return 64 ;}
-}
+		
+
 	
