@@ -5,21 +5,28 @@
 #include "motor.h"
 #include "GPIO_switch.h"
 
-
+int staten = 1; 
 int speed = 100;
+int motor_state = 0; 
  void listener(const uint8_t byte) {
 	switch(byte) {
-		case '1': 
+		case '8': 
 			//adjusting speed to 100
 			speed = 100; 
 			tft_prints(1, 1, "100"); 
 			tft_update(); 
 			break;
-		case '2':
+		case '9':
 			//adjusting speed to 190
 			speed = 190;
 			tft_prints(1, 1, "190"); 
 			tft_update(); 
+			break; 
+		case '1': 
+			staten = 1;
+			break; 
+		case '2':
+			staten = 2; 
 			break; 
 		case 'w':
 			//forward (one of the motor drivers had the direction reversed)
@@ -106,47 +113,73 @@ int main()
   GPIO_switch_init();
   pneumatic_init();
 	tft_init(0,WHITE,BLACK,RED);
-	uart_init(COM3, 115200);
+	uart_init(COM3, 9600);
 	uart_interrupt_init(COM3,&listener);
+	int y; 
 		
 	while(1)
 	{ 
-	  int count=get_ms_ticks();
-		if (count%50==0)
-		{
-	   linear_ccd_read();		
-	   linear_ccd_prints();
-			int x = find_white_line();
-		if(x>50 && x<72)
-		{
-		
-		tft_prints(3,10,"go straight la ");
-		tft_update();
-		motor_control(1,1,70);
-		motor_control(2,0,70);
+		if (staten == 1) {
+			motor_control(1, 1, 0); 
+			motor_control(2, 0, 0); 
 		}
-		 if(x<51)
-		{
+		
+		else if (staten == 2) {
+			int count=get_ms_ticks();
+			if (count%50==0)
+			{
+			 linear_ccd_read();		
+			 linear_ccd_prints();
+				int x = find_white_line();
 			
+					
+			if(x>50 && x<72)
+			{
+				motor_state=1;
+				if (y==motor_state){
+				}else{
+				motor_state = 1;
 		
-		  tft_prints(3,6,"turn left ");
+			tft_prints(3,10,"go straight la ");
 			tft_update();
-			motor_control(1,1,0);
-			motor_control(2,0,120);
-		}
-		 if(x>71)
-		{
-		 
-		  tft_prints(3,6,"turn right ");
-			tft_update();
-			motor_control(1,1,120);
-			motor_control(2,0,0);
+			motor_control(1,1,100);
+			motor_control(2,0,100);
+					y=1;
+				}
+			}
+			 if(x<51)
+			{
+				motor_state=2;
+				if(y==motor_state){
+				}else{
 			
-		}
+				tft_prints(3,6,"turn left ");
+				tft_update();
+				motor_control(1,1,0);
+				motor_control(2,0,120);
+					y=2;
+				}
+			}
+			 if(x>71)
+			{
+			 motor_state=3;
+				if(y==motor_state){
+				}else{
+				tft_prints(3,6,"turn right ");
+				tft_update();
+				motor_control(1,1,120);
+				motor_control(2,0,0);
+					y=3;
+				}
+				
+			}
 		
-		 //tft_prints(4,4,"%d",find_white_line());
-	  linear_ccd_clear();
-		tft_update(); 
+				
+			
+			 //tft_prints(4,4,"%d",find_white_line());
+			linear_ccd_clear();
+			tft_update(); 
+		}
 			
 			
 		}
