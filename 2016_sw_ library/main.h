@@ -4,7 +4,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h> 
+#include <stdbool.h>
 #include "stm32f10x.h"
 #include "ticks.h"
 #include "LEDs.h"
@@ -19,6 +19,8 @@
 #include "button.h"
 #include "uart.h"
 #include "servo_tutorial.h"
+extern int staten;
+
 
 #define MAX_CCRn			1000
 #define MIN_CCRn			450
