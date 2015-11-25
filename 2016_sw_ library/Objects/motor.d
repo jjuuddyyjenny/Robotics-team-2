@@ -22,3 +22,6 @@
 .\objects\motor.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
 .\objects\motor.o: ticks.h
 .\objects\motor.o: buzzer.h
+.\objects\motor.o: linear_ccd.h
+.\objects\motor.o: adc.h
+.\objects\motor.o: .\stm32f10x_std\inc\stm32f10x_adc.h

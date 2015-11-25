@@ -17,6 +17,7 @@ extern u32 linear_ccd_buffer2[128];
 
 #define AO1_channel 1
 #define AO2_channel 2
+extern int sortedArray[128];
 
 
 

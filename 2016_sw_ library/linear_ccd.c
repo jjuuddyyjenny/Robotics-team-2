@@ -161,12 +161,12 @@ void linear_ccd_clear()
 		
 		
 }	
-
+ int sortedArray[128];
  int find_white_line() {
 		
 		int targetNumber = 10;
     int arrayLength = 128;
-    int sortedArray[128];
+
     //int sortedArray[100]; 
     //Only make it 
     for (int h = 0; h < 128; ++h) {

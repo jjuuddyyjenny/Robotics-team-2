@@ -137,7 +137,8 @@ int main()
 			{
 				motor_state=1;
 				if (y==motor_state){
-				}else{
+				}
+				else{
 				
 		
 			tft_prints(3,10,"go straight la ");
@@ -151,7 +152,8 @@ int main()
 			{
 				motor_state=2;
 				if(y==motor_state){
-				}else{
+				}
+				else{
 			
 				tft_prints(3,6,"turn left ");
 				tft_update();
@@ -164,7 +166,8 @@ int main()
 			{
 			 motor_state=3;
 				if(y==motor_state){
-				}else{
+				}
+				else{
 				tft_prints(3,6,"turn right ");
 				tft_update();
 				motor_control(1,1,120);
@@ -174,12 +177,12 @@ int main()
 				
 			}
 		
-				
-			
-			 //tft_prints(4,4,"%d",find_white_line());
+			//tft_prints(4,4,"%d",find_white_line());
 			linear_ccd_clear();
 			tft_update(); 
 		}
+		if (checkendstage())
+		{stop();}
 			
 			
 		}

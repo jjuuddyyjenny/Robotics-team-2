@@ -1,5 +1,5 @@
 #include "motor.h"
-
+#include "linear_ccd.h"
 void motor_init(){
 
     GPIO_InitTypeDef GPIO_InitStructure;
@@ -139,16 +139,18 @@ void turnn(int x){
         tft_update();
     }
 }
-void checkendstage(int max, int min)
-	{
-    
-    if((max-min)<30){   //if y fall in small range stop the car in 1 sec
-        motor_control(1,0,50);
-        motor_control(2,0,50);
-        _delay_ms(1000);
-        motor_control(1,0,0);
-        motor_control(2,0,0);
-    }	
+
+int checkendstage()
+	{int max =sortedArray[1];
+	 int min =sortedArray[126];
+    if(min>100){
+    if((max-min)<10){ 
+		return 1 ;}
+	 }
+    else
+    {return 0;}			
+		
+		
 	}
 	void stop()
 	{
