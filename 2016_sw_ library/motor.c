@@ -139,6 +139,8 @@ void turnn(int x){
         tft_update();
     }
 }
+
+//need logic to create automatic stop in the holder zone
 void checkendstage(int max, int min)
 	{
     

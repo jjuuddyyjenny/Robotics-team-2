@@ -63,6 +63,8 @@ return temp;
 u32 linear_ccd_buffer1[128];
 u32 linear_ccd_buffer2[128];
 u8 flag = 0;
+
+//has the print function already built in...
 void linear_ccd_read(){
 	SI(0);
 	CLK(0);
@@ -95,7 +97,7 @@ void linear_ccd_read(){
 	{
 	
 	 
-		tft_put_pixel(y,linear_ccd_buffer1[y],GREEN);//put linear ccd1 pixels
+		tft_put_pixel(y,linear_ccd_buffer1[y],BLACK);//put linear ccd1 pixels
 		//tft_put_pixel(y,(linear_ccd_buffer2[y]*80 / 4095)+80,GREEN);//put linear ccd2 pixels
 	
 	}
@@ -103,7 +105,7 @@ void linear_ccd_read(){
 	{
 	
 	
-		tft_put_pixel(y,linear_ccd_buffer1[y],BLACK);//clear linear ccd1 pixels
+		tft_put_pixel(y,linear_ccd_buffer1[y],WHITE);//clear linear ccd1 pixels
 		//tft_put_pixel(y,(linear_ccd_buffer2[y]*80 / 4095)+80,BLACK);//clear linear ccd2 pixels
 	
 	
@@ -113,9 +115,6 @@ void linear_ccd_read(){
 	
 	
 }
-
-
-
 
 
 void linear_ccd_init()
@@ -138,6 +137,7 @@ void linear_ccd_init()
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
 	GPIO_Init(SI2_PORT, &GPIO_InitStructure);
 }
+
 void linear_ccd_prints()
 	{ int y ;
 		int x ;
@@ -164,7 +164,7 @@ void linear_ccd_clear()
 
  int find_white_line() {
 		
-		int targetNumber = 10;
+	int targetNumber = 10;
     int arrayLength = 128;
     int sortedArray[128];
     //int sortedArray[100]; 
@@ -194,18 +194,22 @@ void linear_ccd_clear()
             index +=1;
         }
     }
+
     int averagex = 0;
     int sum = 0;
+
     for(int i = 0; i < targetNumber; i++) {
         sum += xvalues[i];
     }
-		if(target>110)
-		{
-    averagex = sum/targetNumber;
-
-    return averagex;
-		}
-		else
-		{return 64 ;}
+	
+	if(target>110) {
+	    averagex = sum/targetNumber;
+	    return averagex;
+	}
+	//so if there's no white line we just have it go straight
+	//maybe change this so that the robot turns to find the white line?
+	else {
+		return 64;
+	}
 }
 	

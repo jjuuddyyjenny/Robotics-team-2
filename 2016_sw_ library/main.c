@@ -103,18 +103,22 @@ int motor_state = 0;
 	}
 }
 
-int main()
-	{
-
-	adc_init();
+void initialize_all() {
+	adc_init(); 
 	ticks_init();
 	linear_ccd_init();
 	motor_init(); 
-  GPIO_switch_init();
-  pneumatic_init();
+  	GPIO_switch_init();
+  	pneumatic_init();
 	tft_init(0,WHITE,BLACK,RED);
 	uart_init(COM3, 9600);
 	uart_interrupt_init(COM3,&listener);
+
+}
+
+int main()
+	{
+	initialize_all(); 
 	int y; 
 		
 	while(1)
@@ -130,7 +134,7 @@ int main()
 			{
 			 linear_ccd_read();		
 			 linear_ccd_prints();
-				int x = find_white_line();
+			 int x = find_white_line();
 			
 					
 			if(x>50 && x<72)
