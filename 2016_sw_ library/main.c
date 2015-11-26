@@ -8,45 +8,80 @@
 int staten = 1; 
 int speed = 100;
 int motor_state = 0; 
- void listener(const uint8_t byte) {
-	switch(byte) {
+
+void stop(){
+	motor_control(1,1,0);
+	motor_control(2,1,0);
+}
+
+while (true){
+	countt+=1;
+	LED_OFF(GPIOB, LED_M); 
+	//temptime=get_ms_ticks();
+	tft_prints(3,3,"%d",countt);
+	tft_update();
+    	uart_interrupt_init(COM3,&listener);
+	byte = uart_get_byte();
+	temptime = get_ms_ticks();
+			
+	switch (byte) {
+		case 'w':
+			//forward (one of the motor drivers had the direction reversed)
+			countw+=1;
+			tft_prints(1,1, "Forward %d",countw);
+			motor_control(1, 1, 150);
+			motor_control(2, 0, 150);
+			tft_update();
+			break;
+		case 's':
+			tft_prints(1,1, "Backward");
+			motor_control(1, 0, 150);
+			motor_control(2, 1, 150);
+			tft_update();
+			break;
+
+		case 'a':
+			tft_prints(1,1, "Left");
+			tft_update();
+			motor_control(1,1,0);
+			motor_control(2, 0,100);
+			break;
+
+		case 'd':
+			tft_prints(1,1, "Right");
+			tft_update();
+			motor_control(1,1,100);
+			motor_control(2, 0,0);
+			break;
+			
+		case NULL:
+			stop();
+			break;
+		case 'o':
+			counto+=1;
+			
+			if(counto%10==0){
+				LED_ON(GPIOB, LED_M); 
+				_delay_ms(500);
+			}
+			
+			else{
+				LED_OFF(GPIOB, LED_M); 
+			}
+			break;
+		case 'u':
+			uart_tx_byte(COM1, byte);
+			break;
+		case 'p':
+			break;
+			
 		case '8': 
 			//adjusting speed to 100
 			speed = 100; 
 			tft_prints(1, 1, "100"); 
 			tft_update(); 
 			break;
-		case '9':
-			//adjusting speed to 190
-			speed = 190;
-			tft_prints(1, 1, "190"); 
-			tft_update(); 
-			break; 
-		case '1': 
-			staten = 1;
-			break; 
-		case '2':
-			staten = 2; 
-			break; 
-		case 'w':
-			//forward (one of the motor drivers had the direction reversed)
-			motor_control(1, 1, speed); 
-			motor_control(2, 0, speed); 
-			_delay_ms(1000); 
-			break;
-		case 'd':
-			//right
-			motor_control(1, 1, speed); 
-			motor_control(2, 1, 0); 
-			_delay_ms(1000);
-			break;
-		case 'a':
-			//left
-			motor_control(1, 1, 0); 
-			motor_control(2, 0, speed); 
-			_delay_ms(1000); 
-			break;
-		case 's':
+				case 's':
 			stop(); 
 			break;
 		case 'x': 
@@ -97,8 +132,68 @@ int motor_state = 0;
 			pneumatic_control(GPIOB, GPIO_Pin_5, 0); 
 			tft_prints(2, 2, "Put Down"); 
 			tft_update(); 
+			break;
+		
+		case '9':
+			//adjusting speed to 190
+			speed = 190;
+			tft_prints(1, 1, "190"); 
+			tft_update(); 
 			break; 
-    default:
+		case '1': 
+			staten = 1;
+			break; 
+		case '2':
+			staten = 2; 
+			break; 
+			
+			
+		default:
+			tft_prints(1,1, "stop");
+			temptime=get_ms_ticks();
+			tft_update();
+			break;
+	}
+		
+		
+		/*
+		if(get_ms_ticks()- temptime>100){
+			stop();
+		}else{
+		}
+		*/
+		
+	afterw+=1;
+	tft_prints(6,6,"afterw %d", afterw);
+	tft_update();
+	stop();
+	}
+}
+
+ void listener(const uint8_t byte) {
+	switch(byte) {
+
+
+		case 'w':
+			
+			motor_control(1, 1, speed); 
+			motor_control(2, 0, speed); 
+			_delay_ms(1000); 
+			break;
+		case 'd':
+			//right
+			motor_control(1, 1, speed); 
+			motor_control(2, 1, 0); 
+			_delay_ms(1000);
+			break;
+		case 'a':
+			//left
+			motor_control(1, 1, 0); 
+			motor_control(2, 0, speed); 
+			_delay_ms(1000); 
+			break;
+ 
+    		default:
 			break; 
 	}
 }
@@ -110,8 +205,8 @@ int main()
 	ticks_init();
 	linear_ccd_init();
 	motor_init(); 
-  GPIO_switch_init();
-  pneumatic_init();
+  	GPIO_switch_init();
+  	pneumatic_init();
 	tft_init(0,WHITE,BLACK,RED);
 	uart_init(COM3, 9600);
 	uart_interrupt_init(COM3,&listener);
@@ -194,10 +289,71 @@ int main()
 
 
 
+/*
+
+int staten= 0;
+
+
+
+int main(){
+	adc_init();
+	ticks_init();
+	linear_ccd_init();
+	motor_init();
+  	GPIO_switch_init();
+  	pneumatic_init();
+	tft_init(0,WHITE,BLACK,RED);
+	uart_init(COM3, 9600);
+	uart_init(COM1, 115200);
+	LED_INIT(); 
+	uint8_t byte;
+	
+	//stop();
+	int countt = 0;
+	int countw = 0;
+	int counto=0;
+	int afterw=0;
+	int temptime;
+	
+	
+
 
 	
 
+ /*
+
+
+int main(){
+	adc_init();
+	ticks_init();
+	linear_ccd_init();
+	motor_init();
+  GPIO_switch_init();
+  pneumatic_init();
+	tft_init(0,WHITE,BLACK,RED);
+	uart_init(COM3, 115200);
+	LED_INIT();
+	uint8_t byte;
+	while (true){
+		LED_OFF(GPIOB, LED_M);
+		tft_update();
+    uart_interrupt_init(COM3,&listener);
+		byte = uart_get_byte();
+		switch (byte) {
+			case 'u':
+				tft_prints(1,1,"received! Congratulation!");
+				tft_update();
+			break;
+			default:
+				tft_prints(1,1, "Garbage Received.");
+				tft_update();
+			break;
+		}
+	}
+}
+
  
+ */
 	
 	
 	
