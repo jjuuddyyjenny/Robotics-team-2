@@ -1,4 +1,3 @@
-
 #ifndef __MAIN_H
 #define __MAIN_H
 
@@ -21,9 +20,8 @@
 #include "servo_tutorial.h"
 extern int staten;
 
-
-#define MAX_CCRn			1000
-#define MIN_CCRn			450
-#define GetCCRn(deg)	(((float)deg / 180) * 600 + MIN_CCRn)
+#define MAX_CCRn   1000
+#define MIN_CCRn   450
+#define GetCCRn(deg) (((float)deg / 180) * 600 + MIN_CCRn)
 
 #endif /* __MAIN_H */

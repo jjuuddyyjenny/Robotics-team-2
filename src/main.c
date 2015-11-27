@@ -5,103 +5,11 @@
 #include "motor.h"
 #include "GPIO_switch.h"
 
+
 int staten = 1; 
 int speed = 100;
 int motor_state = 0; 
- void listener(const uint8_t byte) {
-	switch(byte) {
-		case '8': 
-			//adjusting speed to 100
-			speed = 100; 
-			tft_prints(1, 1, "100"); 
-			tft_update(); 
-			break;
-		case '9':
-			//adjusting speed to 190
-			speed = 190;
-			tft_prints(1, 1, "190"); 
-			tft_update(); 
-			break; 
-		case '1': 
-			staten = 1;
-			break; 
-		case '2':
-			staten = 2; 
-			break; 
-		case 'w':
-			//forward (one of the motor drivers had the direction reversed)
-			motor_control(1, 1, speed); 
-			motor_control(2, 0, speed); 
-			_delay_ms(1000); 
-			break;
-		case 'd':
-			//right
-			motor_control(1, 1, speed); 
-			motor_control(2, 1, 0); 
-			_delay_ms(1000);
-			break;
-		case 'a':
-			//left
-			motor_control(1, 1, 0); 
-			motor_control(2, 0, speed); 
-			_delay_ms(1000); 
-			break;
-		case 's':
-			stop(); 
-			break;
-		case 'x': 
-			//reverse
-			motor_control(1, 0, speed); 
-			motor_control(2, 1, speed); 
-			_delay_ms(1000); 
-			break;
-		case 'g': 
-			//swivel clockwise
-			motor_control(1, 1, speed); 
-			motor_control(2, 1, speed); 
-			_delay_ms(1000); 
-			break;
-		case 'h':
-			//swivel counter clockwise
-			motor_control(1, 0, speed); 
-			motor_control(2, 0, speed); 
-			_delay_ms(1000); 
-			break; 
-		
-		//grip and hit
-		case 'r':
-			checksignal();
-			break;
-		case 'm': 
-			tft_clear();
-			pneumatic_control(GPIOB, GPIO_Pin_8, 0); 
-			tft_prints(2, 2, "let go"); 
-			tft_update(); 
-			break; 
-		case 'n':
-			tft_clear();
-			pneumatic_control(GPIOB, GPIO_Pin_8, 1); 
-			tft_prints(2, 2, "left grab for 1 sec"); 
-			tft_update(); 
-			_delay_ms(1000); 
-			break; 
-		case 'f':
-			tft_clear();
-			pneumatic_control(GPIOB, GPIO_Pin_5, 1); 
-			tft_prints(2, 2, "Raise Flag"); 
-			tft_update(); 
-			//_delay_ms(1000); should we put a delay here? 
-			break; 
-		case 'v': 
-			tft_clear();
-			pneumatic_control(GPIOB, GPIO_Pin_5, 0); 
-			tft_prints(2, 2, "Put Down"); 
-			tft_update(); 
-			break; 
-    default:
-			break; 
-	}
-}
+uint8_t byte;
 
 int main()
 	{
@@ -116,9 +24,10 @@ int main()
 	uart_init(COM3, 9600);
 	uart_interrupt_init(COM3,&listener);
 	int y; 
-		
+
 	while(1)
 	{ 
+	  
 		if (staten == 1) {
 			motor_control(1, 1, 0); 
 			motor_control(2, 0, 0); 
@@ -128,19 +37,19 @@ int main()
 			int count=get_ms_ticks();
 			if (count%50==0)
 			{
+			 //checkendstage();
 			 linear_ccd_read();		
 			 linear_ccd_prints();
-				int x = find_white_line();
+			int x = find_white_line();
+			//int z =find_center_pos(linear_ccd_buffer1);
+				
 			
-					
-			if(x>55 && x<62)
+		 if(x>55&& x<62)
 			{
 				motor_state=1;
 				if (y==motor_state){
 				}
 				else{
-				
-		
 			tft_prints(3,10,"go straight la ");
 			tft_update();
 			motor_control(1,1,100);
@@ -148,23 +57,34 @@ int main()
 					y=1;
 				}
 			}
-			 if(x<56)
-			{
+			else if (x<30){
 				motor_state=2;
 				if(y==motor_state){
 				}
 				else{
-			
+					tft_prints(3,10,"go more left");
+					tft_update();
+					motor_control(1,0, 50);
+					motor_control(2,0, 150);
+					y=2;
+				}
+			}
+			 else if(x<56)
+			{
+				motor_state=3;
+				if(y==motor_state){
+				}
+				else{
 				tft_prints(3,6,"turn left ");
 				tft_update();
 				motor_control(1,0,80);
 				motor_control(2,0,120);
-					y=2;
+					y=3;
 				}
 			}
-			 if(x>61)
+			 else if(x>61&&x<85)
 			{
-			 motor_state=3;
+			 motor_state=4;
 				if(y==motor_state){
 				}
 				else{
@@ -172,17 +92,36 @@ int main()
 				tft_update();
 				motor_control(1,1,120);
 				motor_control(2,1,80);
-					y=3;
+					y=4;
 				}
+			}
+				
+				else if(x>85){
+					motor_state=5;
+					if(y==motor_state){
+					}
+					else{
+						tft_prints(3,6,"turn more right");
+						tft_update();
+						motor_control(1,1,150);
+						motor_control(2,1,50);
+					}
+					y=5;
+				/*if(x==0)
+				{tft_prints(3,6,"backward");
+			   tft_update();
+				motor_control(1,0,80);
+				motor_control(2,1,80);
+				linear_ccd_read();
+				}*/
 				
 			}
 		
-			//tft_prints(4,4,"%d",find_white_line());
+			tft_prints(4,4,"%d",find_white_line());
 			linear_ccd_clear();
 			tft_update(); 
 		}
-		if (checkendstage())
-		{stop();}
+		 
 			
 			
 		}
