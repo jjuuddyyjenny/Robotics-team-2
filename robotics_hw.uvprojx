@@ -577,11 +577,6 @@
               <FilePath>.\src\buzzer_song.c</FilePath>
             </File>
             <File>
-              <FileName>encoder.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\encoder.c</FilePath>
-            </File>
-            <File>
               <FileName>GPIO_switch.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\src\GPIO_switch.c</FilePath>
@@ -607,19 +602,9 @@
               <FilePath>.\src\motor.c</FilePath>
             </File>
             <File>
-              <FileName>motor_pwm_tutorial.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\motor_pwm_tutorial.c</FilePath>
-            </File>
-            <File>
               <FileName>pneumatic_control.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\src\pneumatic_control.c</FilePath>
-            </File>
-            <File>
-              <FileName>servo_tutorial.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\servo_tutorial.c</FilePath>
             </File>
             <File>
               <FileName>tft_display.c</FileName>
