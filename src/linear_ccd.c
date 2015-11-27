@@ -127,7 +127,7 @@ inline void extend_subarray(subarray *sa, unsigned char i, unsigned int increase
 	sa->upper = i + 1;
 }
 
-unsigned int max_subarray(const unsigned char array[], unsigned char *lower, unsigned char *upper) {
+unsigned int max_subarray(const unsigned short array[], unsigned char *lower, unsigned char *upper) {
 	subarray max, tmp;
 	init_subarray(&max, *lower);
 	init_subarray(&tmp, *lower);
