@@ -199,11 +199,59 @@ void linear_ccd_clear()
     for(int i = 0; i < targetNumber; i++) {
         sum += xvalues[i];
     }
-		
-    averagex = sum/targetNumber;
+		if((sortedArray[10]-sortedArray[118])<45)
+    {
 
-    return averagex;
+    return 0;}
+		else
+		{
+		averagex = sum/targetNumber;
+		return averagex;}
 		}
-		
+ 
+//////
+	
+
+inline void init_subarray(subarray *sa, unsigned char i) {
+	sa->sum = 0;
+	sa->lower = sa->upper = i;
+}
+
+inline void extend_subarray(subarray *sa, unsigned char i, unsigned int increase) {
+	sa->sum += increase;
+	sa->upper = i + 1;
+}
+
+unsigned int max_subarray(const unsigned short array[], unsigned char *lower, unsigned char *upper) {
+	subarray max, tmp;
+	init_subarray(&max, *lower);
+	init_subarray(&tmp, *lower);
+
+	for(int i = *lower; i < *upper; i++) {
+		/* if(tmp.sum < 0) {
+			init_subarray(&tmp, i);
+		}
+		*/
+		extend_subarray(&tmp, i, array[i]);
+
+		if(tmp.sum > max.sum) {
+			max = tmp;
+		}
+	}
+	*lower = max.lower;
+	*upper = max.upper;
+
+	return max.sum;
+}
+
+unsigned char find_center_pos(unsigned short *buffer) {
+	unsigned char lower = 0, upper = PIXELS-1;
+	max_subarray(buffer, &lower, &upper);
+	return (lower+upper)/2;
+}
+
+
+	
+	
 
 	
