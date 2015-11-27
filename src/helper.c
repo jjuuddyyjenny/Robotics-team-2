@@ -21,7 +21,6 @@ void init(void)
 	linear_ccd_init();
 	motor_init();
 	button_init();
-	servo_init();
 	
 	buzzer_set_volume(BUZZER_volume);
 	
