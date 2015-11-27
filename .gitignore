@@ -3,6 +3,9 @@
 *.d
 *.crf
 
-# Remove object files
+# FOlder that stores the bject files
 Listings/
 Objects/
+
+# Keil project files
+*.uv*
