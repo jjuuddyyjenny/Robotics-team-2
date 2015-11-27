@@ -7,10 +7,10 @@
 
   <Targets>
     <Target>
-      <TargetName>STM32f103CBT_TEMPLATE</TargetName>
+      <TargetName>STM32F103CBT</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060020::V5.06 (build 20)::ARMCC</pCCUsed>
+      <pCCUsed>5060061::V5.06 update 1 (build 61)::ARMCC</pCCUsed>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32F103CB</Device>
@@ -47,14 +47,14 @@
             <NotGenerated>0</NotGenerated>
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
-          <OutputDirectory>.\Objects\</OutputDirectory>
+          <OutputDirectory>.\bin\</OutputDirectory>
           <OutputName>ROBOTICs_Hw</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>1</CreateHexFile>
           <DebugInformation>1</DebugInformation>
           <BrowseInformation>1</BrowseInformation>
-          <ListingPath>.\Listings\</ListingPath>
+          <ListingPath>.\lst\</ListingPath>
           <HexFormatSelection>1</HexFormatSelection>
           <Merge32K>0</Merge32K>
           <CreateBatchFile>0</CreateBatchFile>
@@ -554,92 +554,97 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>library</GroupName>
+          <GroupName>Library</GroupName>
           <Files>
-            <File>
-              <FileName>LEDs.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\LEDs.c</FilePath>
-            </File>
-            <File>
-              <FileName>ticks.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\ticks.c</FilePath>
-            </File>
-            <File>
-              <FileName>tft_display.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\tft_display.c</FilePath>
-            </File>
-            <File>
-              <FileName>linear_ccd.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\linear_ccd.c</FilePath>
-            </File>
             <File>
               <FileName>adc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\adc.c</FilePath>
-            </File>
-            <File>
-              <FileName>pneumatic_control.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\pneumatic_control.c</FilePath>
-            </File>
-            <File>
-              <FileName>GPIO_switch.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\GPIO_switch.c</FilePath>
+              <FilePath>.\src\adc.c</FilePath>
             </File>
             <File>
               <FileName>button.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\button.c</FilePath>
-            </File>
-            <File>
-              <FileName>motor.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\motor.c</FilePath>
+              <FilePath>.\src\button.c</FilePath>
             </File>
             <File>
               <FileName>buzzer.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\buzzer.c</FilePath>
+              <FilePath>.\src\buzzer.c</FilePath>
             </File>
             <File>
               <FileName>buzzer_song.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\buzzer_song.c</FilePath>
-            </File>
-            <File>
-              <FileName>uart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\uart.c</FilePath>
-            </File>
-            <File>
-              <FileName>servo_tutorial.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\servo_tutorial.c</FilePath>
+              <FilePath>.\src\buzzer_song.c</FilePath>
             </File>
             <File>
               <FileName>encoder.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\encoder.c</FilePath>
+              <FilePath>.\src\encoder.c</FilePath>
+            </File>
+            <File>
+              <FileName>GPIO_switch.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\GPIO_switch.c</FilePath>
             </File>
             <File>
               <FileName>helper.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\helper.c</FilePath>
+              <FilePath>.\src\helper.c</FilePath>
+            </File>
+            <File>
+              <FileName>LEDs.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\LEDs.c</FilePath>
+            </File>
+            <File>
+              <FileName>linear_ccd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\linear_ccd.c</FilePath>
+            </File>
+            <File>
+              <FileName>motor.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\motor.c</FilePath>
+            </File>
+            <File>
+              <FileName>motor_pwm_tutorial.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\motor_pwm_tutorial.c</FilePath>
+            </File>
+            <File>
+              <FileName>pneumatic_control.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\pneumatic_control.c</FilePath>
+            </File>
+            <File>
+              <FileName>servo_tutorial.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\servo_tutorial.c</FilePath>
+            </File>
+            <File>
+              <FileName>tft_display.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\tft_display.c</FilePath>
+            </File>
+            <File>
+              <FileName>ticks.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\ticks.c</FilePath>
+            </File>
+            <File>
+              <FileName>uart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\uart.c</FilePath>
             </File>
           </Files>
         </Group>
         <Group>
-          <GroupName>user</GroupName>
+          <GroupName>User</GroupName>
           <Files>
             <File>
               <FileName>main.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\main.c</FilePath>
+              <FilePath>.\src\main.c</FilePath>
             </File>
           </Files>
         </Group>
