@@ -414,7 +414,7 @@
       </TargetOption>
       <Groups>
         <Group>
-          <GroupName>stm32f103_start_up</GroupName>
+          <GroupName>Startup</GroupName>
           <Files>
             <File>
               <FileName>startup_stm32f10x_md.s</FileName>
@@ -424,7 +424,7 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>stm32f103_std</GroupName>
+          <GroupName>Common</GroupName>
           <Files>
             <File>
               <FileName>core_cm3.c</FileName>
