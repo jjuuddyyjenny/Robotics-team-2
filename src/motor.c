@@ -45,7 +45,7 @@ void motor_init() {
 	// ------------------------------//
 	TIM_OCInitStructure.TIM_Pulse = 0;             // this part sets the initial CCR value that mean the pwm value
 	// ------------------------------//
- \
+
 	// OC Init
 	TIM_OC1Init(TIM1, &TIM_OCInitStructure);
 	TIM_OC1PreloadConfig(TIM1, ENABLE);
@@ -60,8 +60,8 @@ void motor_init() {
 
 }
 
-void motor_control(u8 PWMx,u8 dir,u16 magnitude) { // dir can be 1 or 0  pwm can be 1 or 2
-
+// dir can be 1 or 0  pwm can be 1 or 2.
+void motor_control(u8 PWMx, u8 dir, u16 magnitude) {
 	if(PWMx == 1) {
 		if(dir==0) {
 			GPIO_SetBits(GPIOB,GPIO_Pin_12);
@@ -80,67 +80,4 @@ void motor_control(u8 PWMx,u8 dir,u16 magnitude) { // dir can be 1 or 0  pwm can
 		}
 
 	}
-}
-void start() {
-
-	motor_control(1,0,100);
-	motor_control(2,0,100);
-	_delay_ms(2000);
-	motor_control(1,0,0);
-	motor_control(2,0,100);
-	_delay_ms(2000);
-	motor_control(1,0,100);
-	motor_control(2,0,100);
-	_delay_ms(4000);
-	motor_control(1,0,0);
-	motor_control(2,0,0);
-
-}
-void turnn(int x) {
-	if(x>0 && x<20) {
-		motor_control(1, 0, 0);        // left motor
-		motor_control(2, 0, 100);       // right motor
-		tft_prints(5,5,"Turn left");
-		tft_update();
-	} else if(x>20 && x<40) {
-		motor_control(1, 0, 0);
-		motor_control(2, 0, 75);
-		tft_prints(5,5,"Turn left");
-		tft_update();
-	} else if(x>40 && x<54) {
-		motor_control(1, 0, 0);
-		motor_control(2, 0, 70);
-		tft_prints(5,5,"Turn left");
-		tft_update();
-	}
-	if(x>74 && x<100) {
-		motor_control(1, 0, 100);         // left motor
-		motor_control(2, 0, 0);
-		tft_prints(5,5,"Turn right");
-		tft_update();
-	} else if(x<100 && x>120) {
-		motor_control(1,0, 75);
-		motor_control(2,0, 0);
-		tft_prints(5,5,"Turn right");
-		tft_update();
-	} else if(x>120) {
-		motor_control(1,0,70);
-		motor_control(2,0, 0);
-		tft_prints(5,5,"Turn right");
-		tft_update();
-	}
-}
-
-int checkendstage() {
-	int max = sortedArray[1];
-	int min = sortedArray[126];
-	if(min > 100) {
-		if((max-min) < 10)
-			return 1;
-	} else
-		return 0;
-}
-void stop() {
-	motor_control(1,1,0);
-	motor_control(2,0,0);
 }
