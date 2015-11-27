@@ -2,6 +2,7 @@
 
 #include "adc.h"
 #include "tft_display.h"
+
 #include "linear_ccd.h"
 
 unsigned short wb_threshold;
@@ -145,7 +146,7 @@ unsigned int max_subarray(const unsigned char array[], unsigned char *lower, uns
 }
 
 unsigned char find_center_pos(unsigned short *buffer) {
-	unsigned char lower = 0, upper = PIXEL-1;
+	unsigned char lower = 0, upper = PIXELS-1;
 	max_subarray(buffer, &lower, &upper);
 	return (lower+upper)/2;
 }
