@@ -19,8 +19,8 @@ void initialize() {
 	pneumatic_init();
 	tft_init(0, WHITE, BLACK, RED);
 
-	uart_init(COM3, 9600);
-	uart_interrupt_init(COM3, &listener);
+	//uart_init(COM3, 9600);
+	//uart_interrupt_init(COM3, &listener);
 }
 
 int main() {
