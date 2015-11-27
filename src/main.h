@@ -17,7 +17,8 @@
 #include "GPIO_switch.h"
 #include "button.h"
 #include "uart.h"
-#include "servo_tutorial.h"
+#include "pneumatic_control.h"
+
 extern int staten;
 
 #define MAX_CCRn   1000

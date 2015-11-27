@@ -1,5 +1,5 @@
 #include "motor.h"
-#include "linear_ccd.h"
+
 void motor_init() {
 
 	GPIO_InitTypeDef GPIO_InitStructure;
