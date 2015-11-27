@@ -46,7 +46,7 @@ void toggle_clk(void) {
 	clk_state = ~clk_state;
 }
 
-void init_linear_ccd(void) {
+void linear_ccd_init(void) {
 	// Initialize the manual clock source.
 	GPIO_InitTypeDef GPIO_InitStructure;
 	GPIO_InitStructure.GPIO_Pin = CLK_PIN;

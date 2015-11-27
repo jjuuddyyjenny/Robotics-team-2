@@ -33,7 +33,7 @@ extern unsigned short wb_threshold;
  * Prototypes
  */
 void linear_ccd_init(void);
-void read_linear_ccd(unsigned short *buffer);
+void linear_ccd_read(unsigned short *buffer);
 void set_threshold(unsigned short threshold);
 unsigned char find_center_pos(unsigned short *buffer);
 
