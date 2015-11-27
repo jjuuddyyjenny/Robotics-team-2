@@ -1,4 +1,8 @@
-#include "linear_ccd_new.h"
+#include "stm32f10x_gpio.h"
+
+#include "adc.h"
+#include "tft_display.h"
+#include "linear_ccd.h"
 
 unsigned short wb_threshold;
 
@@ -38,7 +42,7 @@ void toggle_clk(void) {
 	else
 		GPIO_SetBits(CLK_PORT, CLK_PIN);
 
-	clk_state ~= clk_state;
+	clk_state = ~clk_state;
 }
 
 void init_linear_ccd(void) {

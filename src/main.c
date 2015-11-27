@@ -20,7 +20,7 @@ void initialize() {
 	tft_init(0, WHITE, BLACK, RED);
 
 	uart_init(COM3, 9600);
-	uart_interrupt_init(COM3,&listener);
+	uart_interrupt_init(COM3, &listener);
 }
 
 int main() {
@@ -94,8 +94,8 @@ int main() {
 					y = 5;
 				}
 
-				tft_prints(4,4,"%d",find_white_line());
-				linear_ccd_clear();
+				//tft_prints(4,4,"%d",find_white_line());
+				//linear_ccd_clear();
 				tft_update();
 			}
 		}
