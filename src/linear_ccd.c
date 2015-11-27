@@ -132,9 +132,6 @@ unsigned int max_subarray(const unsigned char array[], unsigned char *lower, uns
 	init_subarray(&tmp, *lower);
 
 	for(int i = *lower; i < *upper; i++) {
-		if(tmp.sum < 0) {
-			init_subarray(&tmp, i);
-		}
 		extend_subarray(&tmp, i, array[i]);
 
 		if(tmp.sum > max.sum) {
