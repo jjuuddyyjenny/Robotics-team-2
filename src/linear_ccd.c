@@ -117,12 +117,12 @@ typedef struct {
 	unsigned char upper;
 } subarray;
 
-inline void init_subarray(subarray *sa, unsigned char i) {
+void init_subarray(subarray *sa, unsigned char i) {
 	sa->sum = 0;
 	sa->lower = sa->upper = i;
 }
 
-inline void extend_subarray(subarray *sa, unsigned char i, unsigned int increase) {
+void extend_subarray(subarray *sa, unsigned char i, unsigned int increase) {
 	sa->sum += increase;
 	sa->upper = i + 1;
 }
