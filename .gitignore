@@ -3,3 +3,6 @@
 *.d
 *.crf
 
+# Remove object files
+Listings/
+Objects/
