@@ -25,9 +25,11 @@ void initialize() {
 
 int main() {
 	unsigned char center_pos;
-	unsigned short ccd_data[PIcenter_posELS];
+	unsigned short ccd_data[PIXELS];
 
 	int y;
+
+	initialize();
 
 	while(1) {
 		if(staten == 1) {
@@ -37,7 +39,7 @@ int main() {
 			int count=get_ms_ticks();
 			if(count%50==0) {
 				// checkendstage();
-				linear_ccd_read();
+				linear_ccd_read(ccd_data);
 				center_pos = find_center_pos(ccd_data);
 
 				if(center_pos > 55 && center_pos < 62) {
