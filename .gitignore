@@ -4,8 +4,8 @@
 *.crf
 
 # FOlder that stores the bject files
-Listings/
-Objects/
+lst/
+obj/
 
 # Keil project files
-*.uv*
+
