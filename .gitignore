@@ -3,9 +3,10 @@
 *.d
 *.crf
 
-# FOlder that stores the bject files
+# Folder that stores the bject files
 lst/
 obj/
+bin/
 
 # Keil project files
 
