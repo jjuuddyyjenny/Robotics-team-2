@@ -582,11 +582,6 @@
               <FilePath>.\src\GPIO_switch.c</FilePath>
             </File>
             <File>
-              <FileName>helper.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\helper.c</FilePath>
-            </File>
-            <File>
               <FileName>LEDs.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\src\LEDs.c</FilePath>
