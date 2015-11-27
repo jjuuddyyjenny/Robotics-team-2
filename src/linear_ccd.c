@@ -2,7 +2,7 @@
 
 unsigned short wb_threshold;
 
-unsigned short ccd_data[PIXELS];
+// unsigned short ccd_data[PIXELS];
 unsigned char clk_state;
 
 /*
