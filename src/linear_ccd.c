@@ -15,7 +15,7 @@ unsigned short get_averaged_data(unsigned char channel, unsigned short cnt) {
 
 	unsigned short tmp = 0;
 	for(unsigned short i = 0; i < cnt; i++) {
-		tmp += get_adc(channel);
+		tmp += (unsigned short)get_adc(channel);
 		tmp /= 2; // Note: Keil MDK should be able to optimize this.
 	}
 
@@ -70,7 +70,7 @@ void init_linear_ccd(void) {
 	wb_threshold = DEFAULT_TH;
 }
 
-void read_linear_ccd(unsigned short *buffer) {
+void linear_ccd_read(unsigned short *buffer) {
 	// Note: I need the specification of the sensor.
 	// It seems like SI pull up and then down will tirgger the sensor to dump
 	//  the data of all the pixels, I'm writing in this logic of yours.
